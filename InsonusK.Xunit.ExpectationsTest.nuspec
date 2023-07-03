@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>InsonusK.Xunit.ExpectationsTest</id>
+    <version>1.0.0</version>
+    <authors>InsonusK</authors>
+    <owners>InsonusK</owners>
+    <licenseUrl>https://github.com/InsonusK/InsonusK.Xunit.ExpectationsTest/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/InsonusK/InsonusK.Xunit.ExpectationsTest</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Base class of Xunit test with AAA pattent and expectation methods support</description>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Divergic.Logging.Xunit" version="4.2.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
