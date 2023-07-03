@@ -5,5 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Divergic.Logging.Xunit" Version="4.2.0" />
+  </ItemGroup>
 </Project>
