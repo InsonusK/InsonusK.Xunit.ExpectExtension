@@ -26,12 +26,11 @@
         "aliasadidev.nugetpackagemanagergui",
         "formulahendry.dotnet",
         "formulahendry.dotnet-test-explorer",
-        "GrapeCity.gc-excelviewer",
         "esbenp.prettier-vscode",
         "fernandoescolar.vscode-solution-explorer",
-        "ckolkman.vscode-postgres",
         "k--kato.docomment",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "DotJoshJohnson.xml"
       ]
     }
   },
