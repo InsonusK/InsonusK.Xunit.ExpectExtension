@@ -4,9 +4,9 @@ using Xunit.Abstractions;
 
 namespace InsonusK.Xunit.ExpectationsTest;
 
-public class ExpectationsTest : LoggingTestsBase
+public abstract class ExpectationsTestBase : LoggingTestsBase
 {
-  public ExpectationsTest(ITestOutputHelper output, LogLevel logLevel = LogLevel.Debug) : base(output, logLevel)
+  public ExpectationsTestBase(ITestOutputHelper output, LogLevel logLevel = LogLevel.Debug) : base(output, logLevel)
   {
 
   }
@@ -17,10 +17,10 @@ public class ExpectationsTest : LoggingTestsBase
     {
       assertAction.Invoke();
     }
-    catch (System.Exception ex)
+    catch (System.Exception)
     {
       Logger.LogInformation($"{exception} - Failed");
-      throw ex;
+      throw;
     }
     Logger.LogInformation($"{exception} - Checked");
   }
@@ -30,10 +30,10 @@ public class ExpectationsTest : LoggingTestsBase
     {
       returnObject = assertFunc.Invoke();
     }
-    catch (System.Exception ex)
+    catch (System.Exception)
     {
       Logger.LogInformation($"{exception} - Failed");
-      throw ex;
+      throw;
     }
     Logger.LogInformation($"{exception} - Checked");
   }
@@ -44,10 +44,10 @@ public class ExpectationsTest : LoggingTestsBase
     {
       assertAction.Invoke();
     }
-    catch (System.Exception ex)
+    catch (System.Exception)
     {
       Logger.LogInformation($"{exception} - Failed");
-      throw ex;
+      throw;
     }
     Logger.LogInformation($"{exception} - Checked");
   }
@@ -58,10 +58,10 @@ public class ExpectationsTest : LoggingTestsBase
     {
       returnObject = assertFunc.Invoke();
     }
-    catch (System.Exception ex)
+    catch (System.Exception)
     {
       Logger.LogInformation($"{exception} - Failed");
-      throw ex;
+      throw;
     }
     Logger.LogInformation($"{exception} - Checked");
   }

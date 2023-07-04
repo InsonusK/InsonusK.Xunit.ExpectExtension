@@ -3,7 +3,7 @@ using Xunit.Abstractions;
 
 namespace InsonusK.Xunit.ExpectationsTest.Test;
 
-public class ExpectationsTest_Example : ExpectationsTest
+public class ExpectationsTest_Example : ExpectationsTestBase
 {
   public ExpectationsTest_Example(ITestOutputHelper output, LogLevel logLevel = LogLevel.Debug) : base(output, logLevel)
   {
