@@ -4,8 +4,21 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackageId>InsonusK.Xunit.ExpectationsTest</PackageId>
+    <PackageVersion>1.0.2</PackageVersion>
+    <Authors>InsonusK</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/InsonusK/InsonusK.Xunit.ExpectationsTest</PackageProjectUrl>
+    <Description>Base class of Xunit test expectation methods support</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Divergic.Logging.Xunit" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="./../../LICENSE" Pack="true" PackagePath="/"/>
+    <None Include="./../../README.md" Pack="true" PackagePath="/"/>
   </ItemGroup>
 </Project>
