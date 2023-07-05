@@ -27,7 +27,7 @@ jobs:
           test:
             - ${{ env.test_path }}
     
-            outputs:
+    outputs:
       code_changed: ${{ steps.changed_obj.outputs.code }}  
       test_changed: ${{ steps.changed_obj.outputs.test }}  
       
