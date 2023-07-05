@@ -23,8 +23,6 @@ jobs:
         filters: |
           code:
             - ${{ env.code_path }}
-          test:
-            - ${{ env.test_path }}
     
     outputs:
       code_changed: ${{ steps.changed_obj.outputs.code }}  
