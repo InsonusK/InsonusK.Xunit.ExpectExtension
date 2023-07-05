@@ -17,7 +17,7 @@ jobs:
     
     steps:
     - name: Check does code or test changed
-      uses: dorny/paths-filter@v2.2.0
+      uses: dorny/paths-filter@v2
       id: changed_obj
       with:
         # inline YAML or path to separate file (e.g.: .github/filters.yaml)
