@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/dotnet/sdk:7.0
     needs: check_changing
-    if: ${{ needs.check_changing.outputs.code_changed == 'success' || needs.check_changing.outputs.test_changed == 'success' }}
+    if: ${{ needs.check_changing.outputs.code_changed == 'true' || needs.check_changing.outputs.test_changed == 'true' }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -46,3 +46,13 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Run tests
         run: dotnet test --configuration Release --verbosity m --no-restore
+
+  check_outputs:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+    needs: check_changing
+    steps:
+      - name: print code output
+        run: echo $${{ needs.check_changing.outputs.code_changed }}
+      - name: print test output
+        run: echo $${{ needs.check_changing.outputs.test_changed }}
