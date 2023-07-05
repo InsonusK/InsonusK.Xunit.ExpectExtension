@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
     - name: Check does code or test changed
       uses: dorny/paths-filter@v2
       id: changed_obj
@@ -23,6 +25,8 @@ jobs:
         filters: |
           code:
             - ${{ env.code_path }}
+          test:
+            - ${{ env.test_path }}
     
     outputs:
       code_changed: ${{ steps.changed_obj.outputs.code }}  
