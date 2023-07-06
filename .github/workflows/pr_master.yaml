@@ -7,11 +7,21 @@ on:
     branches: [ master ]
 
 env:
-  !include: jobs/check_changing/check_changing.env.yaml
+  code_path: 'src/**'
+  test_path: 'test/**'
 
 jobs:
   check_changing:
-    !include: jobs/check_changing/check_changing.job.yaml
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check does code or test changed
+      id: changed_obj
+      uses: ./.github/workflows/actions/check_changing
+    
+    outputs:
+      code_changed: ${{ steps.changed_obj.outputs.is-code-changed }}  
+      test_changed: ${{ steps.changed_obj.outputs.is-test-changed }}  
       
   testing:
     runs-on: ubuntu-latest
