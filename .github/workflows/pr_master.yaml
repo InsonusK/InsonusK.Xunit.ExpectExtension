@@ -46,13 +46,15 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Run tests
         run: dotnet test --configuration Release --verbosity m --no-restore
-
-  check_outputs:
+ 
+  label_check:
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/dotnet/sdk:7.0
     needs: check_changing
+    if: ${{ needs.check_changing.outputs.code_changed == 'true' }}
     steps:
-      - name: print code output
-        run: echo $${{ needs.check_changing.outputs.code_changed }}
-      - name: print test output
-        run: echo $${{ needs.check_changing.outputs.test_changed }}
+      - name: Check code label setted for code changes
+        uses: mheap/github-action-required-labels@v1
+        with:
+          mode: exactly
+          count: 1
+          labels: "patch, minor, major"
