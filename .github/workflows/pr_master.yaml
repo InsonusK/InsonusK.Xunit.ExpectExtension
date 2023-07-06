@@ -31,14 +31,8 @@ jobs:
     needs: check_changing
     if: ${{ needs.check_changing.outputs.code_changed == 'true' || needs.check_changing.outputs.test_changed == 'true' }}
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      - name: Run tests
-        run: dotnet test --configuration Release --verbosity m --no-restore
+      - name: Run project unit tests
+        uses: ./.github/workflows/actions/test_project
  
   label_check:
     runs-on: ubuntu-latest
