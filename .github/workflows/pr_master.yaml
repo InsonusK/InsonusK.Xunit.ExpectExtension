@@ -30,6 +30,8 @@ jobs:
     needs: check_changing
     if: ${{ needs.check_changing.outputs.code_changed == 'true' || needs.check_changing.outputs.test_changed == 'true' }}
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: Run project unit tests
         uses: ./.github/workflows/actions/test_project
  
