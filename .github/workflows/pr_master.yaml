@@ -1,4 +1,4 @@
-name: Project Unit tests
+name: Check pull request to master
 
 on:
   push:
@@ -7,30 +7,11 @@ on:
     branches: [ master ]
 
 env:
-  code_path: 'src/**'
-  test_path: 'test/**'
+  !include: jobs/check_changing/check_changing.env.yaml
 
 jobs:
   check_changing:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Check out repository code
-      uses: actions/checkout@v3
-    - name: Check does code or test changed
-      uses: dorny/paths-filter@v2
-      id: changed_obj
-      with:
-        # inline YAML or path to separate file (e.g.: .github/filters.yaml)
-        filters: |
-          code:
-            - ${{ env.code_path }}
-          test:
-            - ${{ env.test_path }}
-    
-    outputs:
-      code_changed: ${{ steps.changed_obj.outputs.code }}  
-      test_changed: ${{ steps.changed_obj.outputs.test }}  
+    !include: jobs/check_changing/check_changing.job.yaml
       
   testing:
     runs-on: ubuntu-latest
