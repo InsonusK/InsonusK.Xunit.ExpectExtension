@@ -1,8 +1,6 @@
 name: Check pull request to master
 
 on:
-  push:
-    branches: [ workflow ]
   pull_request:
     branches: [ master ]
 
@@ -50,7 +48,7 @@ jobs:
           version=$(grep -oPm1 "(?<=<Version>)[^<]+" <<< $file)
           version=v${version}
           echo $version
-          echo "VERSION={version}" >> $GITHUB_OUTPUT
+          echo "VERSION=${version}" >> $GITHUB_OUTPUT
       - name: "Get last release tag"
         id: last_release_version
         uses: InsonusK/get-latest-release@v1.1.0
