@@ -42,13 +42,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: "Get current version of package"
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
         id: project_version
-        run: |
-          file=`cat ${{ env.project_path }}`
-          version=$(grep -oPm1 "(?<=<Version>)[^<]+" <<< $file)
-          version=v${version}
-          echo $version
-          echo "VERSION=${version}" >> $GITHUB_OUTPUT
+        with:
+          proj-path: ${{ env.project_path }}
       - name: "Get last release tag"
         id: last_release_version
         uses: InsonusK/get-latest-release@v1.1.0
