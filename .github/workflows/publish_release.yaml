@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-        
+
       - name: Build package
         run: |
           dotnet pack ${{ env.project_path }} \
@@ -32,10 +32,17 @@ jobs:
             -o ./nuget-packages/ 
       
       - name: push package to nuget
+        id: release_github
+        run: |
+          dotnet nuget push \
+            ./nuget-packages/*.nupkg \
+            -s github \
+            -k ${{ secrets.GITHUB_TOKEN }}
+
+      - name: push package to nuget
         id: release_info
         run: |
           dotnet nuget push \
             ./nuget-packages/*.nupkg \
             -s github \
-            --no-symbols true \
             -k ${{ secrets.GITHUB_TOKEN }}
