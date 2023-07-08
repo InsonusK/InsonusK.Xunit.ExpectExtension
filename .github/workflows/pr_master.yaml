@@ -47,7 +47,7 @@ jobs:
         id: project_version
         run: |
           file=`cat ${{ env.project_path }}`
-          version=$(grep -oPm1 "(?<=<PackageVersion>)[^<]+" <<< $file)
+          version=$(grep -oPm1 "(?<=<Version>)[^<]+" <<< $file)
           version=v${version}
           echo $version
           echo "VERSION={version}" >> $GITHUB_OUTPUT
