@@ -43,8 +43,6 @@ jobs:
     steps:
       - name: Check out nuget.config
         uses: actions/checkout@v3
-        with:
-          path: nuget.config
       - name: download nupkg
         uses: actions/download-artifact@v3
         with:
@@ -64,8 +62,6 @@ jobs:
     steps:
       - name: Check out nuget.config
         uses: actions/checkout@v3
-        with:
-          path: nuget.config
       - name: download nupkg
         uses: actions/download-artifact@v3
         with:
