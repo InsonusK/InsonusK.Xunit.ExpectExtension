@@ -13,13 +13,25 @@ Lib define class Expectatin Test which suppert "Expect" methods
 ```
 
 ### Using
-[Link to example](./test/InsonusK.Xunit.ExpectationsTest.Test/ExpctationsTest.Example.cs)
+[Link to example](./test/InsonusK.Xunit.ExpectationsTest.Test/ExpctationsTestBase.Example.cs)
 ```C#
-Expect("Expect something", () => Assert.True(true));
-
-ExpectGroup("Expect group of conditions", () =>
+public class ExpectationsTest_Example : ExpectationsTestBase
 {
-  Expect("Expectation from group 1", () => Assert.True(true));
-  Expect("Expectation from group 2", () => Assert.True(true));
-});
+  public ExpectationsTest_Example(ITestOutputHelper output, LogLevel logLevel = LogLevel.Debug) : base(output, logLevel)
+  {
+  }
+
+
+  [Fact]
+  public void Example_of_expectation_test()
+  {
+    Expect("Expect something", () => Assert.True(true));
+    
+    ExpectGroup("Expect group of conditions", () =>
+    {
+      Expect("Expectation from group 1", () => Assert.True(true));
+      Expect("Expectation from group 2", () => Assert.True(true));
+    });
+  }
+}
 ```
