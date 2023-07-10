@@ -8,7 +8,7 @@ Lib define class Expectatin Test which suppert "Expect" methods
 ### Import
 ```xml
 <ItemGroup>
-  <PackageReference Include="InsonusK.Xunit.ExpectationsTest" Version="1.0.2" />
+  <PackageReference Include="InsonusK.Xunit.ExpectationsTest" Version="1.0.3" />
 </ItemGroup>
 ```
 
