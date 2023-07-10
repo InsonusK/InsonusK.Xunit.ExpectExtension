@@ -4,6 +4,15 @@
 Lib define class Expectatin Test which suppert "Expect" methods
 
 ## Example
+
+### Import
+```xml
+<ItemGroup>
+  <PackageReference Include="InsonusK.Xunit.ExpectationsTest" Version="1.0.2" />
+</ItemGroup>
+```
+
+### Using
 [Link to example](./test/InsonusK.Xunit.ExpectationsTest.Test/ExpctationsTest.Example.cs)
 ```C#
 Expect("Expect something", () => Assert.True(true));
