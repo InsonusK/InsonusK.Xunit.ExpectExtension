@@ -24,6 +24,60 @@ public abstract class ExpectationsTestBase : LoggingTestsBase
     }
     Logger.LogInformation($"{exception} - Checked");
   }
+  protected void ExpectTask(string exception, Func<Task> assertAction)
+  {
+    try
+    {
+      assertAction.Invoke().Wait();
+    }
+    catch (System.Exception)
+    {
+      Logger.LogInformation($"{exception} - Failed");
+      throw;
+    }
+    Logger.LogInformation($"{exception} - Checked");
+  }
+  protected async Task ExpectTaskAsync(string exception, Func<Task> assertAction)
+  {
+    try
+    {
+      await assertAction.Invoke();
+    }
+    catch (System.Exception)
+    {
+      Logger.LogInformation($"{exception} - Failed");
+      throw;
+    }
+    Logger.LogInformation($"{exception} - Checked");
+  }
+  protected async Task<TRet> ExpectTaskAsync<TRet>(string exception, Func<Task<TRet>> assertAction)
+  {
+    try
+    {
+      var returnObject = await assertAction.Invoke();
+      Logger.LogInformation($"{exception} - Checked");
+      return returnObject;
+    }
+    catch (System.Exception)
+    {
+      Logger.LogInformation($"{exception} - Failed");
+      throw;
+    }
+  }
+  protected void ExpectTask<TRet>(string exception, Func<Task<TRet>> assertAction, out TRet returnObject)
+  {
+    try
+    {
+      returnObject = assertAction.Invoke().GetAwaiter().GetResult();
+    }
+    catch (System.Exception)
+    {
+      Logger.LogInformation($"{exception} - Failed");
+      throw;
+    }
+    Logger.LogInformation($"{exception} - Checked");
+  }
+
   protected void Expect<TRet>(string exception, Func<TRet> assertFunc, out TRet returnObject)
   {
     try
@@ -37,6 +91,7 @@ public abstract class ExpectationsTestBase : LoggingTestsBase
     }
     Logger.LogInformation($"{exception} - Checked");
   }
+
   protected void ExpectGroup(string exception, Action assertAction)
   {
     Logger.LogInformation($"{exception} - Checking");
