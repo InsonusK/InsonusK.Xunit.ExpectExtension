@@ -46,6 +46,7 @@ public class ExpectationsTest_TestCase
   [Fact]
   public void WHEN_call_expect_method_THEN_assert_logic_is_called()
   {
+
     #region Array
     this.logger.LogDebug("Test ARRAY");
 
@@ -67,6 +68,94 @@ public class ExpectationsTest_TestCase
     this.logger.LogDebug("Test ASSERT");
 
     Assert.True(assertedIsAssertCalled);
+
+    #endregion
+  }
+  [Fact]
+  public async void WHEN_call_async_expect_method_THEN_assert_logic_is_called()
+  {
+
+    #region Array
+    this.logger.LogDebug("Test ARRAY");
+
+    ITestOutputHelper mockOutput = Substitute.For<ITestOutputHelper>();
+
+    var assertedClass = new MockExpectationClass(mockOutput);
+    #endregion
+
+
+    #region Act
+    this.logger.LogDebug("Test ACT");
+
+    var assertedIsAssertCalled = await assertedClass.MakeAsyncExpectation("Expect1");
+
+    #endregion
+
+
+    #region Assert
+    this.logger.LogDebug("Test ASSERT");
+
+    Assert.True(assertedIsAssertCalled);
+
+    #endregion
+  }
+
+  [Fact]
+  public void WHEN_call_expect_method_with_return_data_THEN_data_returned()
+  {
+
+    #region Array
+    this.logger.LogDebug("Test ARRAY");
+
+    ITestOutputHelper mockOutput = Substitute.For<ITestOutputHelper>();
+
+    var assertedClass = new MockExpectationClass(mockOutput);
+    var expectedReturn = new Random().Next();
+    #endregion
+
+
+    #region Act
+    this.logger.LogDebug("Test ACT");
+
+    var assertedReturn = assertedClass.MakeExpectationWithReturn("Expect1", expectedReturn);
+
+    #endregion
+
+
+    #region Assert
+    this.logger.LogDebug("Test ASSERT");
+
+    Assert.Equal(expectedReturn, assertedReturn);
+
+    #endregion
+  }
+
+  [Fact]
+  public async void WHEN_call_expect_async_method_with_return_data_THEN_data_returned()
+  {
+
+    #region Array
+    this.logger.LogDebug("Test ARRAY");
+
+    ITestOutputHelper mockOutput = Substitute.For<ITestOutputHelper>();
+
+    var assertedClass = new MockExpectationClass(mockOutput);
+    var expectedReturn = new Random().Next();
+    #endregion
+
+
+    #region Act
+    this.logger.LogDebug("Test ACT");
+
+    var assertedReturn = await assertedClass.MakeAsyncExpectationWithReturn("Expect1", expectedReturn);
+
+    #endregion
+
+
+    #region Assert
+    this.logger.LogDebug("Test ASSERT");
+
+    Assert.Equal(expectedReturn, assertedReturn);
 
     #endregion
   }
@@ -95,6 +184,36 @@ public class ExpectationsTest_TestCase
     this.logger.LogDebug("Test ASSERT");
 
     var assertedException = Assert.Throws<ExpectedException>(() => assertedClass.MakeFailedExpectation(expectedExpectation, expectedId));
+    Assert.Equal(expectedId, assertedException.ID);
+    mockOutput.Received().WriteLine(Arg.Is<string>(v => v.Contains(expectedExpectation) && v.Contains("Failed")));
+
+    #endregion
+  }
+
+  [Fact]
+  public async void WHEN_expectation_in_async_expectation_THEN_it_throws_up()
+  {
+    #region Array
+    this.logger.LogDebug("Test ARRAY");
+
+    ITestOutputHelper mockOutput = Substitute.For<ITestOutputHelper>();
+
+    var assertedClass = new MockExpectationClass(mockOutput);
+    var expectedExpectation = "Expect1";
+    var expectedId = new Random().Next();
+    #endregion
+
+
+    #region Act
+    this.logger.LogDebug("Test ACT");
+
+    #endregion
+
+
+    #region Assert
+    this.logger.LogDebug("Test ASSERT");
+
+    var assertedException = await Assert.ThrowsAsync<ExpectedException>(async () => await assertedClass.MakeFailedAsyncExpectation(expectedExpectation, expectedId));
     Assert.Equal(expectedId, assertedException.ID);
     mockOutput.Received().WriteLine(Arg.Is<string>(v => v.Contains(expectedExpectation) && v.Contains("Failed")));
 

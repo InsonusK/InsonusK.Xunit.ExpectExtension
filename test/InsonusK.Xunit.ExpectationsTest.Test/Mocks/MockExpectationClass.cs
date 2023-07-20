@@ -16,10 +16,42 @@ public class MockExpectationClass : ExpectationsTestBase
     return isAssertCalled;
   }
 
+  public int MakeExpectationWithReturn(string expectation, int expectedValue)
+  {
+    Expect(expectation, () => expectedValue, out var returnValue);
+    return returnValue;
+  }
+  public async Task<int> MakeAsyncExpectationWithReturn(string expectation, int expectedValue)
+  {
+    var returnValue = await ExpectTaskAsync(expectation, async () => await DelayedValue(expectedValue));
+    return returnValue;
+  }
+  public static async Task<int> DelayedValue(int returnValue)
+  {
+    // Wait for 1000 ms using Task.Delay
+    await Task.Delay(1000);
+
+    // Return the integer value (e.g., 42 in this example)
+    return returnValue;
+  }
+  public async Task<bool> MakeAsyncExpectation(string expectation)
+  {
+    var isAssertCalled = false;
+    await ExpectTaskAsync(expectation, async () => await Task.Run(() => { Thread.Sleep(1000); isAssertCalled = true; }));
+    return isAssertCalled;
+  }
+
   public void MakeFailedExpectation(string expectation, int id)
   {
 
     Expect(expectation, () => throw new ExpectedException(id));
+
+  }
+
+  public async Task MakeFailedAsyncExpectation(string expectation, int id)
+  {
+
+    await ExpectTaskAsync(expectation, async () => await Task.Run(() => { Thread.Sleep(1000); throw new ExpectedException(id); }));
 
   }
 

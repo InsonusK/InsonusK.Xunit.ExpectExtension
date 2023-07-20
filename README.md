@@ -26,6 +26,15 @@ public class ExpectationsTest_Example : ExpectationsTestBase
   public void Example_of_expectation_test()
   {
     Expect("Expect something", () => Assert.True(true));
+    await ExpectTaskAsync("Expectation from Delayed Assert", async () => await DelayedAssert());
+
+    var assertedReturnValue = await ExpectTaskAsync("Expectation from DelayedValue", async () => await DelayedValue(expectedValue));
+    Assert.Equal(expectedValue, assertedReturnValue);
+
+    Logger.LogInformation("Experimental solution");
+
+    ExpectTask("Expectation  from DelayedValue with out await", async () => await DelayedValue(expectedValue), out var assertedOutValue);
+    Assert.Equal(assertedOutValue, assertedReturnValue);
     
     ExpectGroup("Expect group of conditions", () =>
     {
