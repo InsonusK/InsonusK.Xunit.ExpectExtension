@@ -44,7 +44,7 @@ public class MockExpectationClass : ExpectationsTestBase
   public void MakeFailedExpectation(string expectation, int id)
   {
 
-    ExpectTaskAsync(expectation, () => throw new ExpectedException(id));
+    Expect(expectation, () => throw new ExpectedException(id));
 
   }
 
